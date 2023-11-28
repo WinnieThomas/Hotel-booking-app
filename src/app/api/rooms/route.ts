@@ -1,6 +1,7 @@
-import type { NextFetchEvent, NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { createEdgeRouter } from "next-connect";
 import { allRooms } from "@/app/controllers/roomControllers";
+import dbConnect from "../../../../config/dbConnect";
 
 interface RequestContext {
   params: {
@@ -9,6 +10,8 @@ interface RequestContext {
 }
 
 const router = createEdgeRouter<NextRequest, RequestContext>();
+
+dbConnect();
 
 router.get(allRooms);
 
