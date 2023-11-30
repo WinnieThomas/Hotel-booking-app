@@ -1,4 +1,48 @@
-import mongoose,{ Schema } from "mongoose";
+import mongoose,{ Document, Schema } from "mongoose";
+
+
+export interface IImage extends Document {
+    public_id: string;
+    url: string;
+  }
+  
+  export interface IReview extends Document {
+    user: mongoose.Schema.Types.ObjectId;
+    rating: number;
+    comment: string;
+  }
+  
+  export interface ILocation {
+    type: string;
+    coordinates: number[];
+    formattedAddress: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+  }
+  
+  export interface IRoom extends Document {
+    name: string;
+    description: string;
+    pricePerNight: number;
+    address: string;
+    location: ILocation;
+    guestCapacity: number;
+    isInternet: boolean;
+    isBreakfast: boolean;
+    isAirConditioned: boolean;
+    isPetsAllowed: boolean;
+    isRoomCleaning: boolean;
+    ratings: number;
+    numOfReviews: number;
+    images: IImage[];
+    category: string;
+    reviews: IReview[];
+    user: mongoose.Schema.Types.ObjectId;
+    createdAt: Date;
+  }
+  
 
 const roomSchema:Schema = new Schema ({
     name:{
@@ -96,7 +140,7 @@ const roomSchema:Schema = new Schema ({
           user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
-            required: true,
+            required: false,
           },
           rating: {
             type: Number,
@@ -118,4 +162,7 @@ const roomSchema:Schema = new Schema ({
         default: Date.now,
       },
 });
+
+export default mongoose.models.Room ||
+  mongoose.model<IRoom>("Room", roomSchema);
 
