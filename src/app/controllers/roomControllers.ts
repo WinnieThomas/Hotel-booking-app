@@ -61,7 +61,7 @@ export const updateRoom = async (req:NextRequest, {params}:{params:{id:string}})
     );
   }
 
-  room= await Room.findByIdAndUpdate(params.id, body {
+  room= await Room.findByIdAndUpdate(params.id, body, {
     new:true,
   });
 
@@ -71,3 +71,27 @@ export const updateRoom = async (req:NextRequest, {params}:{params:{id:string}})
   });
 
 }
+
+
+export const deleteRoom = async (req:NextRequest, {params}:{params:{id:string}}) => {
+
+  let room = await Room.findById(params.id);
+
+  if(!room){
+    return NextResponse.json({
+      message:"room not found!",
+    },
+    {
+      status:404,
+    }
+    );
+  }
+
+  room= await Room.deleteOne();
+
+  return NextResponse.json({
+    success:true,
+  });
+
+}
+
