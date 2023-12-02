@@ -1,7 +1,9 @@
+import { catchAsyncErrors } from "@/middleware/catchAsyncError";
 import Room from "@/models/room";
+import ErrorHandler from "@/utils/errorHandler";
 import { NextRequest, NextResponse } from "next/server";
 
-export const allRooms = async(req:NextRequest) => {
+export const allRooms = catchAsyncErrors(async(req:NextRequest) => {
 
   const resPerPage:number = 8;
   const rooms = await Room.find();
@@ -11,9 +13,9 @@ export const allRooms = async(req:NextRequest) => {
     rooms,
   })
 
-}
+});
 
-export const newRoom = async (req:NextRequest) =>{
+export const newRoom = catchAsyncErrors(async (req:NextRequest) =>{
   const body = await req.json();
 
   const room = await Room.create(body);
@@ -22,20 +24,14 @@ export const newRoom = async (req:NextRequest) =>{
     success:true,
     room,
   })
-}
+});
 
-export const getRoomDetails = async (req:NextRequest, {params}:{params:{id:string}}) => {
+export const getRoomDetails = catchAsyncErrors(async (req:NextRequest, {params}:{params:{id:string}}) => {
 
   const room = await Room.findById(params.id);
 
   if(!room){
-    return NextResponse.json({
-      message:"room not found!",
-    },
-    {
-      status:404,
-    }
-    );
+    throw new ErrorHandler("Room not found", 404);
   }
 
   return NextResponse.json({
@@ -43,22 +39,16 @@ export const getRoomDetails = async (req:NextRequest, {params}:{params:{id:strin
     room,
   });
 
-}
+});
 
 
-export const updateRoom = async (req:NextRequest, {params}:{params:{id:string}}) => {
+export const updateRoom = catchAsyncErrors(async (req:NextRequest, {params}:{params:{id:string}}) => {
 
   let room = await Room.findById(params.id);
   const body = await req.json();
 
   if(!room){
-    return NextResponse.json({
-      message:"room not found!",
-    },
-    {
-      status:404,
-    }
-    );
+    throw new ErrorHandler("Room not found", 404);
   }
 
   room= await Room.findByIdAndUpdate(params.id, body, {
@@ -70,21 +60,15 @@ export const updateRoom = async (req:NextRequest, {params}:{params:{id:string}})
     room,
   });
 
-}
+});
 
 
-export const deleteRoom = async (req:NextRequest, {params}:{params:{id:string}}) => {
+export const deleteRoom = catchAsyncErrors(async (req:NextRequest, {params}:{params:{id:string}}) => {
 
   let room = await Room.findById(params.id);
 
   if(!room){
-    return NextResponse.json({
-      message:"room not found!",
-    },
-    {
-      status:404,
-    }
-    );
+    throw new ErrorHandler("Room not found", 404);
   }
 
   room= await Room.deleteOne();
@@ -93,5 +77,5 @@ export const deleteRoom = async (req:NextRequest, {params}:{params:{id:string}})
     success:true,
   });
 
-}
+});
 
