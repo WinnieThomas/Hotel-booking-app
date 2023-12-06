@@ -17,12 +17,20 @@ export const allRooms = catchAsyncErrors(async(req:NextRequest) => {
     queryStr[key] = value;
   });
 
-  const apiFilters = new APIFilters(Room,queryStr).search();
+  const roomsCount:number = await Room.countDocuments();
 
+  const apiFilters = new APIFilters(Room,queryStr).search().filter();
+  
   let rooms: IRoom[] = await apiFilters.query;
+  const filteredRoomCount:number = rooms.length;
+  apiFilters.pagination(resPerPage);
+  rooms = await apiFilters.query.clone();
 
   return NextResponse.json({
     success:true,
+    filteredRoomCount,
+    roomsCount,
+    resPerPage,
     rooms,
   })
 
