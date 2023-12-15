@@ -1,9 +1,14 @@
 "use client";
 
+import { IRoom } from "@/models/room";
 import React from "react";
 import StarRatings from "react-star-ratings";
 
-const RoomItem = () => {
+interface Props {
+  room: IRoom;
+}
+
+const RoomItem = ({room}:Props) => {
   return (
     <div className="col-sm-12 col-md-6 col-lg-3 my-3 d-flex">
       <div className="card p-2 w-100">
