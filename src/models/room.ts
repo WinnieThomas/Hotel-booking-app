@@ -28,6 +28,7 @@ export interface IImage extends Document {
     pricePerNight: number;
     address: string;
     location: ILocation;
+    numOfBeds: number;
     guestCapacity: number;
     isInternet: boolean;
     isBreakfast: boolean;
