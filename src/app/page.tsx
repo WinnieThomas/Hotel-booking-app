@@ -1,25 +1,11 @@
-import Home from '@/components/home';
-import Error from './error';
 
-export const metadata = {
-    title: "HomePage - BookIT",
-  };
+import Home from '@/components/Home'
+import React from 'react'
 
-
-const getRooms = async() =>{
-    const res = await fetch(`${process.env.API_URL}/api/rooms`,{
-        cache: 'no-cache'
-    });
-    return res.json;
+const homePage = () => {
+  return (
+    <Home/>
+  )
 }
 
-export default async function HomePage() {
-    const data = await getRooms();
-
-    if (data?.message) {
-        return <Error error={data} />;
-      } 
-
-    return <Home data={data}/>
- 
-}
+export default homePage
