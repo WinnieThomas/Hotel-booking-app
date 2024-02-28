@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const allRooms = catchAsyncErrors(async(req:NextRequest) => {
 
-  const resPerPage:number = 8;
+  const resPerPage:number = 4;
 
   const {searchParams} = new URL(req.url);
 
@@ -16,6 +16,7 @@ export const allRooms = catchAsyncErrors(async(req:NextRequest) => {
   searchParams.forEach((value,key)=>{
     queryStr[key] = value;
   });
+
 
   const apiFilters = new APIFilters(Room,queryStr).search().filter();
   
