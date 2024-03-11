@@ -1,6 +1,8 @@
+"use client";
+
 import { IRoom } from '@/models/room'
 import React from 'react'
-import StarRatings from 'react-star-ratings'
+import StarRatings from 'react-star-ratings';
 import RoomImageSlider from './roomImageSlider'
 import RoomFeatures from './roomFeatures'
 import BookingDatePicker from './bookingDatePicker'
@@ -53,4 +55,4 @@ const { room } = data;
 );
 }
 
-export default RoomDetails
+export default RoomDetails;
