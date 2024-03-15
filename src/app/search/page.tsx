@@ -5,7 +5,7 @@ export const metadata = {
     title: "Search Rooms",
   };
 
-const searchPage = () => {
+const SearchPage = () => {
   return (
     <div>
       <Search/>
@@ -13,4 +13,4 @@ const searchPage = () => {
   )
 }
 
-export default searchPage
+export default SearchPage
