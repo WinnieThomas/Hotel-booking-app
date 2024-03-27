@@ -1,6 +1,13 @@
+'use client'
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 import React from "react";
 
+
 const Header = () => {
+  const { data } = useSession();
+
+  console.log(data);
   return (
     <nav className="navbar sticky-top py-2">
       <div className="container">
@@ -27,7 +34,7 @@ const Header = () => {
             >
               <figure className="avatar avatar-nav">
                 <img
-                  src="/images/default_avatar.jpg"
+                  src='/public/images/default_avatar.jpg'
                   alt="John Doe"
                   className="rounded-circle placeholder-glow"
                   height="50"
@@ -55,6 +62,12 @@ const Header = () => {
               </a>
             </div>
           </div>
+          <Link
+            href="/login"
+            className="btn btn-danger px-4 text-white login-header-btn float-right"
+            >
+           Login
+          </Link>
         </div>
       </div>
     </nav>
