@@ -1,4 +1,4 @@
-import User, { IUser } from "@/backend/models/user";
+import User, { IUser } from "@/models/user";
 import { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
