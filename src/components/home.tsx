@@ -3,9 +3,9 @@
 import React from "react";
 import RoomItem from "./room/RoomItem";
 import { IRoom } from "@/models/room";
-import CustomPagination from "./layout/CustomPagination";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import CustomPagination from "./layout/CustomPagination";
 
 interface Props {
   data: {
