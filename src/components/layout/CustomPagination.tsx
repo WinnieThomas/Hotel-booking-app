@@ -17,14 +17,14 @@ const CustomPagination = ({ resPerPage, filteredRoomsCount }: Props) => {
 
   let queryParams;
 
-  const handlePageChange = (currentPage: string) => {
+  const handlePageChange = (currentPage: string|number) => {
     if (typeof window !== "undefined") {
       queryParams = new URLSearchParams(window.location.search);
 
       if (queryParams.has("page")) {
-        queryParams.set("page", currentPage);
+        queryParams.set("page", currentPage.toString());
       } else {
-        queryParams.append("page", currentPage);
+        queryParams.append("page", currentPage.toString());
       }
 
       const path = `${window.location.pathname}?${queryParams.toString()}`;
